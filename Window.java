@@ -2,19 +2,20 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Window {
-    private static final int windowWidth = 800;
-    private static final int windowHeight = 600;
+    private static final int windowWidth = 500;
+    private static final int windowHeight = 300;
 
     private JButton button2Players;
     private JButton buttonTeams;
     private JButton buttonInstruction;
+    private JButton buttonAbout;
     private JFrame frame;
-    private JLabel description;
+
     public Window() {
         frame = new JFrame();
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setTitle("Guess the song");
+        frame.setTitle("SongGuesser");
 
         int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
         int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
@@ -28,25 +29,38 @@ public class Window {
 
     private void InitComponents() {
 
-
-        description = new JLabel();
-        description.setText("Welcome in SongGuesser. You can play with in 2 player mode or team mode.");
+        GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
+        frame.getContentPane().setLayout(groupLayout);
+        groupLayout.setAutoCreateGaps(true);
+        groupLayout.setAutoCreateContainerGaps(true);
 
         button2Players = new JButton("2 players");
-        button2Players.setPreferredSize(new Dimension(200, 100));
         buttonTeams = new JButton("Teams");
-        buttonTeams.setPreferredSize(button2Players.getPreferredSize());
-        buttonInstruction = new JButton("How to play");
-        buttonInstruction.setPreferredSize(button2Players.getPreferredSize());
+        buttonInstruction = new JButton("Tutorial");
+        buttonAbout = new JButton("About");
 
-        JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        groupLayout.setHorizontalGroup(
+                groupLayout.createSequentialGroup()
+                        .addGroup(
+                                groupLayout.createParallelGroup().addComponent(button2Players, 150, 150, 150).addComponent(buttonInstruction, 150, 150, 150)
+                        )
+                        .addGroup(
+                                groupLayout.createParallelGroup().addComponent(buttonTeams, 150, 150, 150).addComponent(buttonAbout, 150, 150, 150)
+                        )
+        );
+        groupLayout.setVerticalGroup(
+                groupLayout.createSequentialGroup()
+                        .addGroup(
+                                groupLayout.createParallelGroup().addComponent(button2Players, 150, 150, 150).addComponent(buttonTeams, 150, 150, 150)
+                        )
+                        .addGroup(
+                                groupLayout.createParallelGroup().addComponent(buttonInstruction, 150, 150, 150).addComponent(buttonAbout, 150, 150, 150)
+                        )
+        );
+        frame.pack();
+    }
 
-        panel.add(description);
-        panel.add(button2Players);
-        panel.add(buttonTeams);
-        panel.add(buttonInstruction);
+    private void addButtonsListeners() {
 
-
-        frame.getContentPane().add(panel, BorderLayout.CENTER);
     }
 }
