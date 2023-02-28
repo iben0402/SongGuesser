@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Window {
     private static final int windowWidth = 500;
@@ -9,7 +11,11 @@ public class Window {
     private JButton buttonTeams;
     private JButton buttonInstruction;
     private JButton buttonAbout;
-    private JFrame frame;
+    private final JFrame frame;
+
+    public enum buttons {
+        TWOPLAYERS, TEAMS, INSTRUCTION, ABOUT
+    }
 
     public Window() {
         frame = new JFrame();
@@ -25,6 +31,7 @@ public class Window {
         frame.setResizable(false);
 
         InitComponents();
+        addButtonsListeners();
     }
 
     private void InitComponents() {
@@ -60,7 +67,26 @@ public class Window {
         frame.pack();
     }
 
-    private void addButtonsListeners() {
+    private class ButtonListener implements ActionListener {
+        buttons button;
+        public ButtonListener(buttons b) {
+            this.button = b;
+        }
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            switch (button) {
+                case ABOUT -> System.out.println("about");
+                case INSTRUCTION -> System.out.println("instruction");
+                case TWOPLAYERS -> System.out.println("Two-players");
+                case TEAMS -> System.out.println("teams");
+            }
+        }
+    }
 
+    private void addButtonsListeners() {
+        button2Players.addActionListener(new ButtonListener(buttons.TWOPLAYERS));
+        buttonTeams.addActionListener(new ButtonListener(buttons.TEAMS));
+        buttonInstruction.addActionListener(new ButtonListener(buttons.INSTRUCTION));
+        buttonAbout.addActionListener(new ButtonListener(buttons.ABOUT));
     }
 }
