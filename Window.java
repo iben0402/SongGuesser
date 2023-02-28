@@ -77,7 +77,14 @@ public class Window {
             switch (button) {
                 case ABOUT -> System.out.println("about");
                 case INSTRUCTION -> System.out.println("instruction");
-                case TWOPLAYERS -> System.out.println("Two-players");
+                case TWOPLAYERS -> {
+                    InputName first = new InputName("Enter name of first player");
+                    InputName second = new InputName("Enter name of second player");
+                    String firstPlayer = first.getName();
+                    String secondPlayer = second.getName();
+                    //todo reading players name correctly
+
+                }
                 case TEAMS -> System.out.println("teams");
             }
         }
