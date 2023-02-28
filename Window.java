@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 public class Window {
     private static final int windowWidth = 500;
@@ -69,6 +71,8 @@ public class Window {
 
     private class ButtonListener implements ActionListener {
         buttons button;
+
+
         public ButtonListener(buttons b) {
             this.button = b;
         }
@@ -78,12 +82,8 @@ public class Window {
                 case ABOUT -> System.out.println("about");
                 case INSTRUCTION -> System.out.println("instruction");
                 case TWOPLAYERS -> {
-                    InputName first = new InputName("Enter name of first player");
-                    InputName second = new InputName("Enter name of second player");
-                    String firstPlayer = first.getName();
-                    String secondPlayer = second.getName();
-                    //todo reading players name correctly
-
+                    new InputName("Enter player names");
+                    frame.dispose();
                 }
                 case TEAMS -> System.out.println("teams");
             }
